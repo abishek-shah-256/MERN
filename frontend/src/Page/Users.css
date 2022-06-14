@@ -1,0 +1,14 @@
+.Cont {
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.tableCont {
+    margin-top: -100px;
+    width: 700px;
+}
+thead {
+    background-color: rgb(230, 187, 94);
+}
