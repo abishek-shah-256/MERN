@@ -29,12 +29,12 @@ const Edit = () => {
 
     const onFinish = async (values) => {
         // console.log('Success:', values);
-        const {username,password,email,address_state,address_city} = values;
+        const {username,password,email,address_state,address_city,weather} = values;
         const id = data._id;
 
         try{
             const repdata = await api.put("http://localhost:5000/editUser",{ 
-              id,username,password,email,address_state,address_city
+              id,username,password,email,address_state,address_city,weather
             })
             
             message.success(repdata.data)
@@ -72,7 +72,8 @@ const Edit = () => {
       password:data.password,
       email:data.email,
       address_state:data.address.address_state,
-      address_city:data.address.address_city
+      address_city:data.address.address_city,
+      weather:data.address.weather,
     }}
     onFinish={onFinish}
     onFinishFailed={onFinishFailed}
@@ -134,6 +135,18 @@ const Edit = () => {
         {
           required: true,
           message: "Please input your address!",
+        },
+      ]}
+    >
+      <Input />
+    </Form.Item>
+    <Form.Item
+      label="Temperature"
+      name="weather"
+      rules={[
+        {
+          required: true,
+          message: "Please input Weather temperature!",
         },
       ]}
     >

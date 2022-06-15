@@ -4,13 +4,14 @@ import jwt from "jsonwebtoken";
 
 export const SignUp = async (req, res) => {
   // console.log(req.body)
-  const { username, password, email, address_state, address_city } = req.body;
+  const { username, password, email, address_state, address_city ,weather} = req.body;
 
   if (!username) return res.status(400).send("Name is required");
   if (!password) return res.status(400).send("Password is required");
   if (!email) return res.status(400).send("Email is required");
   if (!address_state) return res.status(400).send("Address is required");
   if (!address_city) return res.status(400).send("Address is required");
+  if (!weather) return res.status(400).send("Temperature is required");
 
   let userExist = await users
     .findOne({
@@ -31,6 +32,7 @@ export const SignUp = async (req, res) => {
     address: {
       address_state,
       address_city,
+      weather
     },
   });
 
@@ -38,10 +40,9 @@ export const SignUp = async (req, res) => {
   return res.json({ Message: "User has been registered" });
 };
 
-
+//loginnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnn
 export const Login = async (req, res) => {
   const { username, password } = req.body;
-  // console.log(req.body);
   try {
     const findUser = await users
       .findOne({
@@ -83,12 +84,12 @@ export const Login = async (req, res) => {
     console.log("error aayo");
   }
 };
-
+//logoutttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttt
 export const Logout=async(req,res)=>{
   res.clearCookie('token')
   return res.json({Message : "Bye Bye"})
 }
-
+//display user tableeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee
 export const Users = async (req, res) => {
   const userInfo = await users
     .find({
@@ -109,10 +110,10 @@ export const SingleUser = async (req, res) => {
   res.json(findSingleUser);
   console.log(findSingleUser);
 };
-//editing user---->
+//editing userrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrr---->
 export const EditUser = async (req, res) => {
-  console.log("backma data aako" + req.body.id);
-  const { id, username, password, email, address_state, address_city } =
+  // console.log("backma data aako" + req.body.id);
+  const { id, username, password, email, address_state, address_city ,weather} =
     req.body;
 
   const updateUser = await users
@@ -120,12 +121,12 @@ export const EditUser = async (req, res) => {
       username,
       password,
       email,
-      address: { address_state, address_city },
+      address: { address_state, address_city ,weather},
     })
     .exec();
   res.status(200).send("user updated successfully");
 };
-
+//delete userrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrr
 export const DeleteUser = async (req, res) => {
   console.log(req.query);
   const { userid } = req.query;

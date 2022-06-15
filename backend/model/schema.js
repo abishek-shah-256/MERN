@@ -2,6 +2,8 @@ import mongoose from 'mongoose';
 
 const {Schema} = mongoose;
 
+
+
 const addressSchema = new Schema({
     address_state:{
         type:String,
@@ -10,6 +12,10 @@ const addressSchema = new Schema({
     address_city:{
         type:String,
         required:true,
+    },
+    weather:{
+       type:Number,
+       required:true,
     }
   });
 

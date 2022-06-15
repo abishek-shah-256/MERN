@@ -54,6 +54,7 @@ const Users = () => {
               <th>Email</th>
               <th>State</th>
               <th>City</th>
+              <th>Temperature</th>
               <th>Edit</th>
               <th>Delete</th>
             </tr>
@@ -66,6 +67,7 @@ const Users = () => {
                   <td>{item.email}</td>
                   <td>{item.address.address_state}</td>
                   <td>{item.address.address_city}</td>
+                  <td>{item.address.weather}° C</td>
                   <td>
                     <EditTwoTone
                       onClick={() => {

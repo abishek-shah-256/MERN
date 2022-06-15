@@ -11,11 +11,11 @@ const SignUp = () => {
 
   const onFinish = async (values) => {
     console.log("Success:", values);
-    const {username,password,email,address_state,address_city} = values;
+    const {username,password,email,address_state,address_city,weather} = values;
 
     try{
       const {data} = await axios.post("http://localhost:5000/signUp",{
-        username,password,email,address_state,address_city
+        username,password,email,address_state,address_city,weather
       })
       console.log(data.Message)
       message.success("Successfully registered")
@@ -109,6 +109,18 @@ const SignUp = () => {
             {
               required: true,
               message: "Please input your City",
+            },
+          ]}
+        >
+          <Input />
+        </Form.Item>
+        <Form.Item
+          label="Temperature"
+          name="weather"
+          rules={[
+            {
+              required: true,
+              message: "Please input the weather temperature",
             },
           ]}
         >
